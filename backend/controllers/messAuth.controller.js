@@ -1,7 +1,8 @@
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt'
+import crypto from 'crypto'
 import { generateVerificationToken } from '../../utils/generateVerificationToken.js'
 import { generateTokenAndSetCookie } from '../../utils/generateTokenAndSetCookie.js'
-import { sendVerificationEmail } from '../emailManagement/emails.js';
+import { sendVerificationEmail,sendWelcomeEmail, sendPasswordResetEmail ,passwordResetSuccessEmail } from '../emailManagement/emails.js';
 import { Mess } from '../models/mess.model.js'; 
 
 export const register = async (req, res) => {
@@ -9,7 +10,7 @@ export const register = async (req, res) => {
 
     try {
 
-        if (!name || !email || !password || !location || !amount || !timings) {
+        if (!name || !email || !password ) {
             return res.status(400).json({ message: 'Please enter all required fields' });
         }
 
@@ -43,7 +44,6 @@ export const register = async (req, res) => {
             mess: {
                 ...mess._doc, 
                 password: undefined,
-                verificationToken: undefined,
             },
         });
     } catch (error) {
@@ -71,6 +71,7 @@ export const verifyEmail = async (req, res) => {
         mess.verificationToken = undefined
         mess.verificationTokenExpiresAt = undefined
         await mess.save()
+
         sendWelcomeEmail(mess.email , mess.name)
         res.status(200).json({
             success: true, 
@@ -133,15 +134,14 @@ export const forgotPassword = async (req, res) => {
         const resetPasswordTokenExpiresAt = Date.now() + 1 * 24 * 60 * 60 * 1000
         mess.resetPasswordToken = resetPasswordToken;
         mess.resetPasswordTokenExpiresAt = resetPasswordTokenExpiresAt;
-        
         await mess.save();
-        
+
         await sendPasswordResetEmail(email, resetPasswordToken)
 
         return res.status(200).json({success: true, message: 'Reset password link sent to your email'})
 
     } catch (error) {
-        return res.status(500).json({success: false, message: 'Internal server error'})
+        return res.status(500).json({success: false, message: error.message})
     }
 }
 
