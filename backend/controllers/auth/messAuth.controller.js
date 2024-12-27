@@ -1,10 +1,10 @@
 import bcrypt from 'bcrypt'
 import crypto from 'crypto'
-import { generateVerificationToken } from '../../utils/generateVerificationToken.js'
-import { generateTokenAndSetCookie } from '../../utils/generateTokenAndSetCookie.js'
-import { isValidEmail } from '../../utils/isValidEmailFormat.js';
-import { sendVerificationEmail,sendWelcomeEmail, sendPasswordResetEmail ,passwordResetSuccessEmail } from '../emailManagement/emails.js';
-import { Mess } from '../models/mess.model.js'; 
+import { generateVerificationToken } from '../../../utils/generateVerificationToken.js'
+import { generateTokenAndSetCookie } from '../../../utils/generateTokenAndSetCookie.js'
+import { isValidEmail } from '../../../utils/isValidEmailFormat.js';
+import { sendVerificationEmail,sendWelcomeEmail, sendPasswordResetEmail ,passwordResetSuccessEmail } from '../../emailManagement/emails.js';
+import { Mess } from '../../models/mess.model.js'; 
 
 
 export const register = async (req, res) => {
