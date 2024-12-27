@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const MessSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -8,19 +8,16 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true,
     },
     password: {
         type: String,
         required: true,
     },
-    balance:{
-        type: Number,
-        default : 0,
+    location:{
+        type: String,
     },
-    lastLogin: {
-        type: Date,
-        default: Date.now,
+    amount:{
+        type: Number,
     },
     isverified : {
         type: Boolean,
@@ -38,11 +35,17 @@ const userSchema = new mongoose.Schema({
     verificationTokenExpiresAt: {
         type: Date,
     },
-    qrCode: { type: String, defualt: "" }, 
-},{timestamps: true});
+    lastLogin: {
+        type: Date,
+        default: Date.now,
+    },
+    timings: {
+        breakfast: { start: String, end: String },
+        lunch: { start: String, end: String },
+        dinner: { start: String, end: String },
+    },
 
 
+},{timestamps: true});    
 
-
-export const User = mongoose.model('User', userSchema);
-
+export const Mess = mongoose.model('Mess', MessSchema);

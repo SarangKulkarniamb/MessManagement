@@ -2,7 +2,8 @@ import express from 'express'
 import dotenv from 'dotenv'
 
 import { connectDB } from './db/connectDB.js'
-import authRouter from './routes/auth.route.js'
+import userAuthRouter from './routes/userAuth.route.js'
+import messAuthRouter from './routes/messAuth.route.js'
 
 dotenv.config()
 
@@ -15,7 +16,9 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use("/api/auth", authRouter)
+app.use("/api/user/auth", userAuthRouter)
+app.use("/api/mess/auth", messAuthRouter)
+
 
 app.listen(PORT, () => {
     connectDB()
