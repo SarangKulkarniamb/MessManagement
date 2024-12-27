@@ -2,8 +2,10 @@ import bcrypt from 'bcrypt'
 import crypto from 'crypto'
 import { generateVerificationToken } from '../../utils/generateVerificationToken.js'
 import { generateTokenAndSetCookie } from '../../utils/generateTokenAndSetCookie.js'
+import { isValidEmail } from '../../utils/isValidEmailFormat.js';
 import { sendVerificationEmail,sendWelcomeEmail, sendPasswordResetEmail ,passwordResetSuccessEmail } from '../emailManagement/emails.js';
 import { Mess } from '../models/mess.model.js'; 
+
 
 export const register = async (req, res) => {
     const { name, email, password, location, amount, timings } = req.body;
@@ -13,7 +15,9 @@ export const register = async (req, res) => {
         if (!name || !email || !password ) {
             return res.status(400).json({ message: 'Please enter all required fields' });
         }
-
+        if(isValidEmail(email) === false){
+            return res.status(400).json({ message: 'Invalid email format' });
+        }
         const messAlreadyExists = await Mess.findOne({ email });
         if (messAlreadyExists) {
             return res.status(400).json({ success: false, message: 'Mess already exists' });

@@ -3,6 +3,7 @@ import crypto from 'crypto'
 import { sendVerificationEmail,sendWelcomeEmail, sendPasswordResetEmail ,passwordResetSuccessEmail } from '../emailManagement/emails.js'
 import { generateVerificationToken } from '../../utils/generateVerificationToken.js'
 import { generateTokenAndSetCookie } from '../../utils/generateTokenAndSetCookie.js'
+import { isValidEmail } from '../../utils/isValidEmailFormat.js'
 import { User } from '../models/user.model.js'
 
 
@@ -12,6 +13,9 @@ export const register = async (req, res) => {
     try {
         if(!email || !name || !password){
             return res.status(400).json({message: 'Please enter all fields'})
+        }
+         if(isValidEmail(email) === false){
+                    return res.status(400).json({ message: 'Invalid email format' });
         }
         const userAlreadyExists = await User.findOne({
             email               
