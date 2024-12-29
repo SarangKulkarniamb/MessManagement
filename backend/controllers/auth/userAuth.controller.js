@@ -35,7 +35,7 @@ export const register = async (req, res) => {
         name,
         password: hashedPassword,
         verificationToken,
-        verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000
+        verificationTokenExpiresAt: Date.now() + 1*60*60*1000  //verification token expires in 1 hour
     })
 
     generateTokenAndSetCookie(res, user._id)  //generateTokenAndSetCookie generates a token and sets it in a cookie....from generateTokenAndSetCookie.js in utils folder

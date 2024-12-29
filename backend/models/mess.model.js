@@ -48,4 +48,5 @@ const MessSchema = new mongoose.Schema({
 
 },{timestamps: true});    
 
+MessSchema.index({ verificationTokenExpiresAt: 1 }, { expireAfterSeconds: 0 });
 export const Mess = mongoose.model('Mess', MessSchema);
