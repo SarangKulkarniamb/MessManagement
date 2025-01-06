@@ -22,7 +22,7 @@ const SwipeSection = () => {
 
   return (
     <div className="container py-12">
-      <h2 className="text-3xl text-center font-semibold text-blue-950 mb-8">
+      <h2 className="text-2xl lg:text-3xl text-center font-semibold text-blue-950 mb-8">
         Explore Our Features
       </h2>
 
@@ -44,10 +44,10 @@ const SwipeSection = () => {
         <div className="w-full lg:w-3/4 shadow-md">
           <Slider ref={sliderRef} {...settings}>
             <div>
-              <div className="flex justify-around items-center text-black p-8 rounded-xl">
-                <div>
-                    <h3 className="text-3xl text-blue-950 font-semibold">QR Payments</h3>
-                    <p className="mt-4 text-xl">Fast and secure transactions with QR codes.</p>
+              <div className="flex flex-col md:flex-row justify-around gap-6 items-center text-center text-black p-8 rounded-xl">
+                <div className="flex flex-col gap-4"> 
+                    <h3 className="text-xl md:text-2xl lg:text-3xl text-blue-950 font-semibold">QR Payments</h3>
+                    <p className="mt-4 text-md md:text-lg lg:text-xl">Fast and secure transactions with QR codes.</p>
                 </div>
                 
                 <img src={heroImage} className="w-48 h-48" alt="" />
@@ -55,10 +55,10 @@ const SwipeSection = () => {
             </div>
            
             <div>
-              <div className="flex justify-around items-center text-black p-8 rounded-xl">
-                <div>
-                    <h3 className="text-3xl text-blue-950 font-semibold">Account Recharge</h3>
-                    <p className="mt-4 text-xl">Easily top up your account anytime.</p>
+              <div className="flex flex-col md:flex-row justify-around items-center text-center text-black p-8 rounded-xl">
+                <div className="flex flex-col gap-4">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl text-blue-950 font-semibold">Account Recharge</h3>
+                    <p className="mt-4 text-md md:text-lg lg:text-xl">Easily top up your account anytime.</p>
                 </div>
                 
                 <img src={heroImage} className="w-48 h-48" alt="" />
@@ -66,10 +66,10 @@ const SwipeSection = () => {
             </div>
        
             <div>
-              <div className="flex justify-around items-center text-black p-8 rounded-xl">
-                <div>
-                    <h3 className="text-3xl text-blue-950 font-semibold">Transaction History</h3>
-                    <p className="mt-4 text-xl">View your past payments and logs.</p>
+              <div className="flex flex-col md:flex-row gap-6 justify-around items-center text-center text-black p-8 rounded-xl">
+                <div className="flex flex-col gap-4">
+                    <h3 className="text-xl md:text-2xl lg:text-3xl text-blue-950 font-semibold">Transaction History</h3>
+                    <p className="mt-4 text-md md:text-lg lg:text-xl">View your past payments and logs.</p>
                 </div>
                 
                 <img src={heroImage} className="w-48 h-48" alt="" />
