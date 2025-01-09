@@ -39,12 +39,6 @@ const MessSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    timings: {
-        breakfast: { start: String, end: String },
-        lunch: { start: String, end: String },
-        dinner: { start: String, end: String },
-    },
-
 
 },{timestamps: true});    
 
