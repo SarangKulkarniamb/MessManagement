@@ -9,13 +9,13 @@ import { User } from '../../models/user.model.js'
 
 export const register = async (req, res) => {
 
-    const { email, name , password } = req.body
+    const { email, username , password ,role} = req.body
     try {
-        if(!email || !name || !password){
+        if(!email || !username || !password || !role){
             return res.status(400).json({message: 'Please enter all fields'})
         }
          if(isValidEmail(email) === false){
-                    return res.status(400).json({ message: 'Invalid email format' });
+            return res.status(400).json({ message: 'Invalid email format' });
         }
         const userAlreadyExists = await User.findOne({
             email               
@@ -32,8 +32,9 @@ export const register = async (req, res) => {
 
     const user = await User.create({
         email,
-        name,
+        username,
         password: hashedPassword,
+        role,
         verificationToken,
         verificationTokenExpiresAt: Date.now() + 1*60*60*1000  //verification token expires in 1 hour
     })
@@ -66,11 +67,11 @@ export const verifyEmail = async (req, res) => {
             return res.status(400).json({success: false, message: 'Invalid or expired token'})
         }
     
-        user.isverified = true
+        user.isVerified = true
         user.verificationToken = undefined
         user.verificationTokenExpiresAt = undefined
         await user.save()
-        sendWelcomeEmail(user.email , user.name)
+        sendWelcomeEmail(user.email , user.username)
         res.status(200).json({
             success: true, 
             message: 'Email verified successfully',

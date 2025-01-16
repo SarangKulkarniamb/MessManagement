@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
-        name: {
+        username: {
             type: String,
             required: true,
         },
@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        balance: {
-            type: Number,
-            default: 0,
+        role : {
+            type:String,
+            required : true,
         },
         lastLogin: {
             type: Date,
@@ -39,14 +39,9 @@ const userSchema = new mongoose.Schema(
         verificationTokenExpiresAt: {
             type: Date,
         },
-        qrCode: {
-            type: String,
-            default: "", 
-        },
     },
     { timestamps: true } 
 );
-
 
 userSchema.index({ verificationTokenExpiresAt: 1 }, { expireAfterSeconds: 0 });
 
