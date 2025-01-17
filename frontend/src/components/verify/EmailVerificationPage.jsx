@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 
 
 export const EmailVerificationPage = () => {
-	const url = `http://localhost:5000/api/auth/verify`
+	const url = `http://localhost:3000/api/auth/verify`
 	const [code, setCode] = useState(["", "", "", "", "", ""]);
 	const [loading, setLoading] = useState(false);
 	const inputRefs = useRef([]);
@@ -60,10 +60,10 @@ export const EmailVerificationPage = () => {
 			if (!response.data.success) {
 				toast.error(response.data.message || "Verification failed.");
 			} else {
-				toast.success("Verification successful! Redirecting to login page...", { duration: 5000 });
+				toast.success("Verification successful! Redirecting to login page...", { duration: 3000 });
 				setTimeout(() => {
 					navigate('/login');
-				}, 5000);
+				}, 3000);
 			}
 		} catch (error) {
 			console.error("Verification error:", error.response?.data || error.message);
@@ -77,7 +77,7 @@ export const EmailVerificationPage = () => {
 
 	return (
 		
-		<div className='max-w-md w-full rounded-2xl overflow-hidden'>
+		<div className='max-w-md w-full shadow-md rounded-2xl overflow-hidden'>
 			<div><Toaster /></div>
 			<motion.div
 				initial={{ opacity: 0, y: -50 }}

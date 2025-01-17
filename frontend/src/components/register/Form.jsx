@@ -24,6 +24,7 @@ export const Form = ({ role, url }) => {
   const [feedback, setFeedback] = useState("Weak") // password strength
   const [loading, setLoading] = useState(false) // loading API call
   const navigate = useNavigate()
+
   // recoil atom for auth state
   const setAuthState = useSetRecoilState(authState)
 
@@ -92,25 +93,25 @@ export const Form = ({ role, url }) => {
     setLoading(true)
   
     try {
-      const response = await axios.post(url, form);
+      const response = await axios.post(url, form)
     
       if (!response.data.success) {
-        toast.error(response.data.message);
+        toast.error(response.data.message)
       } else {
-        toast.success("Registration successful! Redirecting to verification page...", { duration: 5000 });
+        toast.success("Registration successful! Redirecting to verification page...", { duration: 3000 })
         setAuthState({
             user: response.data.user,
-        });
+        })
 
         setTimeout(() => {
-          navigate('/verify');
-        }, 5000);
+          navigate('/verify')
+        }, 3000)
       }
     } catch (error) {
-      console.error("Error during registration:", error);
-      toast.error(error?.response?.data?.message || "There was an error with your registration. Please try again.");
+      console.error("Error during registration:", error)
+      toast.error(error?.response?.data?.message || "There was an error with your registration. Please try again.")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 

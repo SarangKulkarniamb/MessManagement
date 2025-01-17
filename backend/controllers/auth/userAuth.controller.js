@@ -5,7 +5,7 @@ import { generateVerificationToken } from '../../../utils/generateVerificationTo
 import { generateTokenAndSetCookie } from '../../../utils/generateTokenAndSetCookie.js'
 import { isValidEmail } from '../../../utils/isValidEmailFormat.js'
 import { User } from '../../models/user.model.js'
-
+import jwt from 'jsonwebtoken';
 
 export const register = async (req, res) => {
 
@@ -89,13 +89,22 @@ export const verifyEmail = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    const email = req.body.email
+    const cred = req.body.cred
     const password = req.body.password
-    const user = await User.findOne({ email })
+
+    const isValidEmail = (cred) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(cred);
+
+    let user = null;
+    if (isValidEmail(cred)) {
+        user = await User.findOne({ email: cred });
+    } else {
+        user = await User.findOne({ username: cred });
+    }
+        
     if(!user){
         return res.status(400).json({success: false, message: 'Invalid credentials'})
     }
-    if(!user.isverified){
+    if(!user.isVerified){
         return res.status(400).json({success: false, message: 'Please verify your email to login'})
     }
     const isPasswordCorrect = await bcrypt.compare(password, user.password)
@@ -117,10 +126,14 @@ export const login = async (req, res) => {
     })
 }
 
-export const logout = async (req, res) => {
-    res.clearCookie('token')
-    res.status(200).json({success: true, message: 'Logged out successfully'})
-}
+export const logout = (req, res) => {
+    res.clearCookie('token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    });
+    res.status(200).json({ success: true, message: 'Logged out successfully' });
+};
 
 export const forgotPassword = async (req, res) => {
     const { email } = req.body
@@ -173,3 +186,24 @@ export const resetPassword = async (req, res) => {
         return res.status(500).json({success: false, message: 'Internal server error'})
     }
 }
+
+export const check_auth = async (req, res) => {
+    const token = req.cookies.token;
+   
+    if (!token) {
+      return res.status(401).json({ success: false, message: 'No token provided' });
+    }
+  
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const user = await User.findById(decoded.id);
+  
+      if (!user) {
+        return res.status(401).json({ success: false, message: 'User not found' });
+      }
+  
+      return res.status(200).json({ success: true, user });
+    } catch (error) {
+      return res.status(401).json({ success: false, message: 'Invalid or expired token' });
+    }
+};

@@ -4,7 +4,7 @@ import Footer from '../components/footer/Footer'
 import {motion} from 'framer-motion'
 import { EmailVerificationPage } from '../components/verify/EmailVerificationPage'
 
-export const Verification = () => {
+const Verification = () => {
   return (
     <div className="min-h-screen overflow-x-hidden bg-white-50">
       <motion.div
@@ -46,7 +46,7 @@ export const Verification = () => {
                     },
                 },
             }}
-            className='flex justify-center items-center h-screen'>
+            className='flex justify-center items-center'>
                 <EmailVerificationPage />
         </motion.div>
           
@@ -57,3 +57,4 @@ export const Verification = () => {
   )
 }
 
+export default Verification
