@@ -18,7 +18,10 @@ export const Form = ({ role, url }) => {
     email: "",
     role,
   })
-  
+  useEffect(() => {
+    setForm((prevForm) => ({ ...prevForm, role })); // Update role when prop changes
+  }, [role]);
+
   // useful states
   const [score, setScore] = useState(0)
   const [feedback, setFeedback] = useState("Weak") // password strength

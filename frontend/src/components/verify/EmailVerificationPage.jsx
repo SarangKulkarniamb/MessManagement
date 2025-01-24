@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 
 
 export const EmailVerificationPage = () => {
-	const url = `http://localhost:3000/api/auth/verify`
+	const url = `http://localhost:5000/api/auth/verify`
 	const [code, setCode] = useState(["", "", "", "", "", ""]);
 	const [loading, setLoading] = useState(false);
 	const inputRefs = useRef([]);
@@ -51,11 +51,11 @@ export const EmailVerificationPage = () => {
 		const data = {
 			token: code.join(""),
 		};
-		console.log("Submitting token:", data);
+
 	
 		try {
 			const response = await axios.post(url, data);
-			console.log("Server Response:", response);
+	
 	
 			if (!response.data.success) {
 				toast.error(response.data.message || "Verification failed.");
@@ -66,11 +66,9 @@ export const EmailVerificationPage = () => {
 				}, 3000);
 			}
 		} catch (error) {
-			console.error("Verification error:", error.response?.data || error.message);
 			toast.error(error?.response?.data?.message || "There was an error with account verification. Please try again.");
 		} finally {
 			setLoading(false);
-			console.log("Loading state set to false.");
 		}
 	};
 	

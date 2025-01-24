@@ -8,8 +8,8 @@ const serverDomain = process.env.SERVER_DOMAIN;
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.GMAIL_EMAIL, // Your Gmail email address
-    pass: process.env.GMAIL_PASSWORD // Your Gmail application-specific password
+    user: process.env.GMAIL_EMAIL, 
+    pass: process.env.GMAIL_PASSWORD 
   }
 });
 

@@ -21,6 +21,7 @@ app.use("/api/auth", userAuthRouter)
 
 
 app.listen(PORT, () => {
+    console.log("connecting to database...")
     connectDB()
     console.log(`Server is running on http://localhost:${PORT}`)
 })
