@@ -6,7 +6,7 @@ import Input from '../register/Input'
 import {User,Lock} from 'lucide-react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import {useSetRecoilState,useRecoilValue} from 'recoil'
+import {useSetRecoilState} from 'recoil'
 import { authState } from '../../atoms/authAtom'
 
 export const Loginform =() =>{
