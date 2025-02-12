@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import { VERIFICATION_EMAIL_TEMPLATE, PASSWORD_RESET_REQUEST_TEMPLATE, PASSWORD_RESET_SUCCESS_TEMPLATE } from "./emailTemplates.js";
+import { VERIFICATION_EMAIL_TEMPLATE, PASSWORD_RESET_REQUEST_TEMPLATE, PASSWORD_RESET_SUCCESS_TEMPLATE , WELCOME_EMAIL_TEMPLATE } from "./emailTemplates.js";
 
 dotenv.config();
 
@@ -34,8 +34,8 @@ export const sendVerificationEmail = async (email, verificationCode) => {
   await sendEmail(email, "Verify your email", htmlContent);
 };
 
-export const sendWelcomeEmail = async (email, name) => {
-  const htmlContent = `<p>Hello ${name},</p><p>Welcome to our platform!</p>`;
+export const sendWelcomeEmail = async (email, username) => {
+  const htmlContent = WELCOME_EMAIL_TEMPLATE.replace("{username}" , username);
   await sendEmail(email, "Welcome to our Platform!", htmlContent);
 };
 

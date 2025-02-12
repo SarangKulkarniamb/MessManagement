@@ -46,7 +46,7 @@ const Verification = () => {
                     },
                 },
             }}
-            className='flex justify-center items-center'>
+            className='flex justify-center h-screen items-center'>
                 <EmailVerificationPage />
         </motion.div>
           
