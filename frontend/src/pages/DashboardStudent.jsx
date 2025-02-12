@@ -1,20 +1,21 @@
-import { useRecoilValue } from 'recoil'
-import { authState } from '../atoms/authAtom'
-import { Link } from 'react-router-dom'
-import Dash from '../components/DashboardStudent/Dash'
-const DashboardStudent = () => {
-  const auth = useRecoilValue(authState) // Getting auth state
+import React, { useState } from 'react'
+import Sidebar from '../components/DashboardStudent/Sidebar'
+import Nav from '../components/DashboardStudent/Nav'
+import MainBody from '../components/DashboardStudent/MainBody'
 
+
+const DashboardStudent = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
-      <h1>Welcome, {auth.user?.username}</h1> 
-       
-      <Link to="/logout"> <button className='border border-black p-2' >LOGOUT</button> </Link>
-      
-      {/* Dashboard content */}
-      <Dash />
+    <div className="flex h-screen">
+      <Sidebar isOpen={isOpen} toggleSidebar={() => setIsOpen(!isOpen)} />
+      <div className="flex-1 ml-16 transition-all duration-300">
+        <Nav />
+        <MainBody />
+      </div>
     </div>
-  )
+  );
 }
 
 export default DashboardStudent
+
