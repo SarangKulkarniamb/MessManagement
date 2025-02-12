@@ -11,7 +11,7 @@ import { authState } from '../../atoms/authAtom'
 
 export const Loginform =() =>{
 
-  const url = `http://localhost:5000/api/auth/login`
+  const url = `${import.meta.env.VITE_API_URL}/login`;
   const [form, setForm] = useState({
       cred : "",
       password : ""
@@ -33,7 +33,7 @@ export const Loginform =() =>{
     setLoading(true);
   
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', form, { withCredentials: true });
+      const response = await axios.post(url, form, { withCredentials: true });
       
       if (!response.data.success) {
         toast.error(response.data.message);

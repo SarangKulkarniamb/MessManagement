@@ -6,11 +6,11 @@ import axios from 'axios';
 
 const CheckAuthStatus = () => {
   const setAuthState = useSetRecoilState(authState);
-
+  const url = `${import.meta.env.VITE_API_URL}/check-auth`
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/auth/check-auth', { withCredentials: true });
+        const response = await axios.get(url, { withCredentials: true });
         if (response.data.success) {
           setAuthState({ isAuthenticated: true, user: response.data.user });
         }

@@ -7,10 +7,10 @@ import { useEffect } from 'react'
 const Logout = () => {
   const setAuthState = useSetRecoilState(authState);
   const navigate = useNavigate();
-
+  const url = `${import.meta.env.VITE_API_URL}/logout`
   const handleLogout = async () => {
     try {
-      await axios.get('http://localhost:5000/api/auth/logout', { withCredentials: true });
+      await axios.get(url, { withCredentials: true });
       setAuthState({ isAuthenticated: false, user: null });
       navigate('/login');
     } catch (error) {

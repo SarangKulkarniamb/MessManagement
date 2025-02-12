@@ -6,7 +6,7 @@ const SharedForm = () => {
 
     const [role,setRole] =useState("Student")
 
-    const url = `http://localhost:5000/api/auth/register`
+    const url = `${import.meta.env.VITE_API_URL}/register`
 
     return (
       <div className="min-h-screen flex flex-col items-center bg-gray-50 py-10 px-4">

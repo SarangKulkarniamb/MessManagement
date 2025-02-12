@@ -7,7 +7,7 @@ import { Toaster } from "react-hot-toast";
 
 
 export const EmailVerificationPage = () => {
-	const url = `http://localhost:5000/api/auth/verify`
+	const url = `${import.meta.env.VITE_API_URL}/verify`
 	const [code, setCode] = useState(["", "", "", "", "", ""]);
 	const [loading, setLoading] = useState(false);
 	const inputRefs = useRef([]);

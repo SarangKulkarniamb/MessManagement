@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil'
 import { authState } from '../atoms/authAtom'
 import { Link } from 'react-router-dom'
-
+import Dash from '../components/DashboardStudent/Dash'
 const DashboardStudent = () => {
   const auth = useRecoilValue(authState) // Getting auth state
 
@@ -12,6 +12,7 @@ const DashboardStudent = () => {
       <Link to="/logout"> <button className='border border-black p-2' >LOGOUT</button> </Link>
       
       {/* Dashboard content */}
+      <Dash />
     </div>
   )
 }
