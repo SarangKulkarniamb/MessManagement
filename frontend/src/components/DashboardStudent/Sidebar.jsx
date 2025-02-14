@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Menu, Home, Settings, BarChart } from "lucide-react";
+import { Menu, User, Settings, Utensils ,Home } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { Link } from "react-router-dom";
 
 function Sidebar({ isOpen, toggleSidebar }) {
   return (
@@ -15,12 +15,14 @@ function Sidebar({ isOpen, toggleSidebar }) {
         <Menu size={24} />
       </button>
       <nav className="flex flex-col space-y-4">
-        <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-700">
-          <Home size={20} /> {isOpen && "Home"}
+
+      <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-700">
+          <Link to=""><Home size={20} /> {isOpen && "Home"}</Link>
         </button>
         <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-700">
-          <BarChart size={20} /> {isOpen && "Analytics"}
+          <Link to="profile"><User size={20} /> {isOpen && "Profile"}</Link>
         </button>
+       
         <button className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-700">
           <Settings size={20} /> {isOpen && "Settings"}
         </button>

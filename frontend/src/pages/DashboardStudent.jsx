@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Sidebar from '../components/DashboardStudent/Sidebar'
 import Nav from '../components/DashboardStudent/Nav'
-import MainBody from '../components/DashboardStudent/MainBody'
-
+import { Outlet } from 'react-router-dom'
 
 const DashboardStudent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +10,7 @@ const DashboardStudent = () => {
       <Sidebar isOpen={isOpen} toggleSidebar={() => setIsOpen(!isOpen)} />
       <div className="flex-1 ml-16 transition-all duration-300">
         <Nav />
-        <MainBody />
+        <Outlet />
       </div>
     </div>
   );

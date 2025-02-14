@@ -10,6 +10,8 @@ import { useRecoilValue } from 'recoil'
 import { authState } from './atoms/authAtom'
 import CheckAuthStatus from './components/helper/CheckAuthStatus'
 import Logout from './components/helper/Logout'
+import StudentProfileForm from './components/DashboardStudent/StudentProfileForm'
+import MainBody from './components/DashboardStudent/MainBody'
 // Protected route component
 const Protected = ({ children, allowedRoles, isPublic = false }) => {
   const auth = useRecoilValue(authState);
@@ -50,7 +52,10 @@ const App = () => {
         <Route path="/verify" element={<Protected isPublic={true}><Verification /></Protected>} />
 
         {/* Protected Routes */}
-        <Route path="/student/dashboard" element={<Protected allowedRoles={['student']}><DashboardStudent /></Protected>} />
+        <Route path="/student/dashboard" element={<Protected allowedRoles={['student']}><DashboardStudent /></Protected>}>
+          <Route path="profile" element={<Protected allowedRoles={['student']}><StudentProfileForm /></Protected>} />
+          <Route path="" element={<Protected allowedRoles={['student']}><MainBody /></Protected>} />
+        </Route>
         <Route path="/mess/dashboard" element={<Protected allowedRoles={['mess']}><DashboardMess /></Protected>} />
         <Route path="/logout" element = { <Protected><Logout/></Protected> }></Route>
 
